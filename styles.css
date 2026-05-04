@@ -1,0 +1,183 @@
+:root {
+    --bg-dark: #121824;
+    --bg-card: #1c2434;
+    --gold: #d4af37;
+    --text-light: #f4f4f4;
+    --text-muted: #a0aabf;
+    --whatsapp: #25D366;
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-main); background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+/* --- PRELOADER & CURTAIN LIFT --- */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    z-index: 9999; display: flex; justify-content: center; align-items: center;
+    visibility: visible;
+}
+
+/* The solid background that acts as the curtain */
+.curtain-panel {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-dark);
+    border-bottom: 3px solid var(--gold); /* Luxurious gold trim on the bottom edge */
+    z-index: -1; 
+    /* The cubic-bezier gives it a slow-start, fast-middle, slow-end cinematic feel */
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.loader-content { 
+    text-align: center; 
+    transition: opacity 0.5s ease; /* Smooth fade out for the text */
+}
+
+/* Classes triggered by JavaScript */
+.text-fade-out { opacity: 0; }
+.curtain-lift-up .curtain-panel { transform: translateY(-100%); }
+
+/* Preloader Image Styles */
+.preloader-image {
+    max-width: 120px; height: auto; margin-bottom: 20px; border-radius: 8px;
+    animation: imagePulse 2s infinite ease-in-out;
+}
+
+@keyframes imagePulse {
+    0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+    50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+    100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+.gold-text { color: var(--gold); font-size: 28px; letter-spacing: 4px; }
+.pulse-line {
+    width: 100px; height: 2px; background: var(--gold);
+    margin: 15px auto; animation: pulseWidth 1.5s infinite ease-in-out;
+}
+@keyframes pulseWidth {
+    0% { width: 0; opacity: 0;}
+    50% { width: 100px; opacity: 1;}
+    100% { width: 0; opacity: 0;}
+}
+
+/* --- HEADER & LOGO --- */
+header {
+    background-color: rgba(18, 24, 36, 0.95); padding: 15px 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.logo { display: flex; align-items: center; }
+
+/* Brand Logo Styles */
+.brand-logo {
+    height: 40px; /* Adjust this to make your logo bigger or smaller */
+    width: auto;
+    margin-right: 12px;
+}
+
+.logo h2 { color: var(--gold); font-size: 22px; letter-spacing: 1px; }
+.logo span { color: var(--text-light); }
+nav { display: flex; }
+nav a { color: var(--text-light); text-decoration: none; margin-left: 20px; font-weight: 600; transition: color 0.3s ease; }
+nav a:hover, nav a.active { color: var(--gold); }
+
+/* Pages */
+.page { display: none; padding: 0 0 60px; min-height: 70vh; }
+.page.active { display: block; }
+.page-header { text-align: center; margin: 40px 5%; }
+.page-header h2 { color: var(--gold); font-size: 36px; }
+
+/* HERO SLIDESHOW */
+.hero {
+    position: relative; height: 500px; display: flex; justify-content: center; align-items: center;
+    text-align: center; overflow: hidden; margin-bottom: 50px;
+}
+.slideshow { position: absolute; inset: 0; z-index: 0; }
+.slide {
+    position: absolute; inset: 0; background-size: cover; background-position: center;
+    opacity: 0; animation: crossfade 15s infinite;
+}
+.slide:nth-child(1) { animation-delay: 0s; }
+.slide:nth-child(2) { animation-delay: 5s; }
+.slide:nth-child(3) { animation-delay: 10s; }
+
+@keyframes crossfade {
+    0%, 100% { opacity: 0; transform: scale(1.05); }
+    10%, 33% { opacity: 1; transform: scale(1); }
+    43% { opacity: 0; transform: scale(1.05); }
+}
+
+.hero-overlay { position: absolute; inset: 0; background: rgba(18, 24, 36, 0.7); z-index: 1; }
+.hero-content { position: relative; z-index: 2; padding: 0 20px; }
+.hero h1 { font-size: 48px; margin-bottom: 15px; }
+.hero h1 span { color: var(--gold); }
+.hero p { color: var(--text-light); font-size: 18px; margin-bottom: 30px; }
+
+.btn {
+    display: inline-block; background-color: var(--gold); color: var(--bg-dark);
+    padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s;
+}
+.btn:hover { background-color: #e5c355; transform: translateY(-3px); }
+
+/* Services Container */
+.services-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; padding: 0 5%; }
+.service-box {
+    background-color: var(--bg-card); padding: 30px; border-radius: 10px;
+    border-top: 4px solid var(--gold); flex: 1; min-width: 300px;
+}
+.service-box i.fa-couch, .service-box i.fa-tools { font-size: 40px; color: var(--gold); margin-bottom: 15px; }
+.service-box ul { list-style: none; margin-top: 15px; }
+.service-box ul li { margin-bottom: 10px; color: var(--text-muted); }
+.service-box ul li i { color: var(--gold); margin-right: 10px; }
+
+/* PRODUCT CATEGORY CAROUSELS */
+#catalog-container { padding: 0 5%; }
+.category-section { margin-bottom: 50px; }
+.category-title { color: var(--gold); font-size: 24px; margin-bottom: 20px; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 10px; }
+
+.carousel {
+    display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.carousel::-webkit-scrollbar { display: none; }
+
+.carousel-item {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    background-color: var(--bg-card); border-radius: 10px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.item-img { height: 250px; background-size: cover; background-position: center; }
+.item-content { padding: 20px; display: flex; flex-direction: column; }
+.item-content h4 { margin-bottom: 15px; font-size: 18px; }
+
+/* WhatsApp CTA Button */
+.wa-btn {
+    display: inline-block; background-color: var(--whatsapp); color: white;
+    padding: 10px 15px; border-radius: 5px; text-decoration: none;
+    font-weight: bold; text-align: center; transition: 0.3s; width: 100%;
+}
+.wa-btn:hover { background-color: #1ebe57; transform: translateY(-2px); }
+.wa-btn i { margin-right: 8px; font-size: 18px; }
+
+/* Footer & Mobile Nav */
+footer { background-color: #0b0f17; padding: 40px 5%; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-top: 1px solid rgba(212,175,55,0.1); }
+footer p, footer a { color: var(--text-muted); text-decoration: none; margin-bottom: 10px; display: block; }
+footer i { color: var(--gold); margin-right: 10px; }
+
+.mobile-menu-btn { display: none; background: none; border: none; color: var(--gold); font-size: 24px; cursor: pointer; }
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 36px; }
+    .brand-logo { height: 30px; } /* Slightly smaller logo on mobile */
+    .mobile-menu-btn { display: block; }
+    nav#main-nav {
+        display: none; position: absolute; top: 100%; left: 0; width: 100%;
+        background-color: rgba(18, 24, 36, 0.98); flex-direction: column; padding: 20px 0; border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    nav#main-nav.show { display: flex; animation: fadeInUp 0.3s ease forwards; }
+    nav#main-nav a { margin: 15px 0; text-align: center; display: block; font-size: 18px; }
+    .carousel-item { flex: 0 0 85vw; } 
+}
